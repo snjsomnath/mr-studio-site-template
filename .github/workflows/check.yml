@@ -5,7 +5,8 @@ on:
   pull_request:
 
 env:
-  # The MR Studio version the studio computer runs. Raise it when the app there is updated.
+  # The MR Studio version to check with when the table does not name one. The app writes the
+  # version that last changed the table into mrstudio.version, and the check uses that.
   MRSTUDIO_VERSION: "0.47.0"
 
 jobs:
@@ -14,6 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+      - name: Use the version the table was made with
+        run: |
+          if [ -s mrstudio.version ]; then echo "MRSTUDIO_VERSION=$(head -n 1 mrstudio.version | tr -d '[:space:]')" >> "$GITHUB_ENV"; fi
       - uses: actions/cache@v4
         with:
           path: ~/.cargo/bin/mrstudio
