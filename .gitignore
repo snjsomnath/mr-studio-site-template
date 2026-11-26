@@ -1,0 +1,7 @@
+# Kept by the table for offline use, and made again when needed.
+.cache/
+scene/
+# Code layers: dependencies; the built dist/ is kept so the app can load the layer without Node.
+node_modules/
+.DS_Store
+Thumbs.db

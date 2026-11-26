@@ -1,0 +1,25 @@
+name: Check the table
+
+on:
+  push:
+  pull_request:
+
+env:
+  # The MR Studio version the studio computer runs. Raise it when the app there is updated.
+  MRSTUDIO_VERSION: "0.47.0"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/mrstudio
+          key: mrstudio-${{ env.MRSTUDIO_VERSION }}
+      - name: Install the mrstudio command line
+        run: |
+          command -v mrstudio >/dev/null || cargo install --locked --git https://github.com/snjsomnath/mr-studio --tag "v${MRSTUDIO_VERSION}" mrs-cli
+      - name: Check site.json, the data it names and the scene
+        run: mrstudio validate .

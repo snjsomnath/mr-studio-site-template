@@ -1,0 +1,41 @@
+{
+  "format": 3,
+  "id": "our-table",
+  "name": "Our table",
+  "origin": {
+    "lon": 11.9746,
+    "lat": 57.7089
+  },
+  "extent": {
+    "width_m": 1000.0,
+    "height_m": 600.0,
+    "rotation_deg": 0.0
+  },
+  "timezone": "Europe/Stockholm",
+  "table": {
+    "width_cm": 100,
+    "height_cm": 60.0
+  },
+  "scene": {
+    "cell_m": 1
+  },
+  "basemap": {
+    "background": "#0b0e14",
+    "style": null
+  },
+  "layers": [
+    {
+      "use": "basemap",
+      "id": "basemap",
+      "active": true
+    },
+    {
+      "use": "sunlight",
+      "id": "sunlight",
+      "active": false
+    }
+  ],
+  "branding": {
+    "title": "Our table"
+  }
+}
