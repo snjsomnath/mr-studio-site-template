@@ -26,9 +26,21 @@ calibrating the projector and sharing.
 | `data/` | The table's files: buildings, streets, trees, pictures, videos, your own datasets. **Insert › Data file** in the editor puts them here |
 | `layers/` | Your own code layers, if you write any (`mrstudio layer new . my-layer`). Most tables need none |
 | `.github/workflows/check.yml` | Checks the table on every push, so a broken `site.json` is caught before it reaches the studio computer |
+| `.gitlab-ci.yml` | The same check for a table kept on GitLab. Delete whichever of the two you do not use |
 
-Not kept in git (see `.gitignore`): `.cache/` (map pictures the table keeps for offline use) and
-`scene/` (what `mrstudio prepare` writes for inspection). Both are made again when needed.
+Not kept in git (see `.gitignore`): `.cache/` (map pictures the table keeps for offline use),
+`scene/` (what `mrstudio prepare` writes for inspection) and `.cargo/` (where the GitLab check
+keeps the command line). Both are made again when needed.
+
+## Keep it on GitLab
+
+GitLab has no "Use this template" button. Make the repository with **New project › Import
+project › Repository by URL** and give it
+`https://github.com/snjsomnath/mr-studio-site-template.git`. The `.gitlab-ci.yml` check then runs
+on every push, as long as the group has CI runners.
+
+Big files such as videos and hourly rasters belong in Git LFS (`git lfs track "data/**/*.mp4"`).
+Check how much LFS space the group has first. GitLab's check fetches LFS files by itself.
 
 ## Share it with the studio computer
 
@@ -42,7 +54,7 @@ computer's keychain, and an exported table carries none.
 
 ## The check
 
-`.github/workflows/check.yml` installs the `mrstudio` command line and runs `mrstudio validate .`.
+`.github/workflows/check.yml` (or `.gitlab-ci.yml` on GitLab) installs the `mrstudio` command line and runs `mrstudio validate .`.
 It uses the version in `mrstudio.version`, which the app writes when it changes the table, so
 keep that file in the repository. A table without one is checked with `MRSTUDIO_VERSION`. A
 studio computer with an older app says which version to install when it opens the table. The first run takes a few minutes to build the command line; later runs reuse it.

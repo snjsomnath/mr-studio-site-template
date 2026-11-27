@@ -1,0 +1,25 @@
+# Checks the table on every push, the same check as .github/workflows/check.yml, for teams that
+# keep the table on GitLab (for example Chalmers GitLab). It installs the mrstudio command line at
+# the version in mrstudio.version and runs `mrstudio validate .`.
+
+variables:
+  # The MR Studio version to check with when the table does not name one.
+  MRSTUDIO_VERSION: "0.47.0"
+  # GitLab can only cache folders inside the project, so the command line is installed here.
+  CARGO_HOME: "$CI_PROJECT_DIR/.cargo"
+
+check:
+  image: rust:1-slim
+  cache:
+    key:
+      files:
+        - mrstudio.version
+    paths:
+      - .cargo/bin/
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq git pkg-config libssl-dev >/dev/null
+    - if [ -s mrstudio.version ]; then export MRSTUDIO_VERSION="$(head -n 1 mrstudio.version | tr -d '[:space:]')"; fi
+    - export PATH="$CARGO_HOME/bin:$PATH"
+    - command -v mrstudio >/dev/null || cargo install --locked --git https://github.com/snjsomnath/mr-studio --tag "v${MRSTUDIO_VERSION}" mrs-cli
+  script:
+    - mrstudio validate .
