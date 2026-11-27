@@ -23,7 +23,7 @@ calibrating the projector and sharing.
 | Path | What it is |
 | --- | --- |
 | `site.json` | The table: where it is, its size, its layers, the controller's words. The editor writes it; you rarely edit it by hand |
-| `data/` | The table's files: buildings, streets, trees, pictures, videos, your own datasets. **Add › Data file** in the editor puts them here |
+| `data/` | The table's files: buildings, streets, trees, pictures, videos, your own datasets. **Insert › Data file** in the editor puts them here |
 | `layers/` | Your own code layers, if you write any (`mrstudio layer new . my-layer`). Most tables need none |
 | `.github/workflows/check.yml` | Checks the table on every push, so a broken `site.json` is caught before it reaches the studio computer |
 
