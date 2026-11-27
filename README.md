@@ -30,7 +30,7 @@ calibrating the projector and sharing.
 
 Not kept in git (see `.gitignore`): `.cache/` (map pictures the table keeps for offline use),
 `scene/` (what `mrstudio prepare` writes for inspection) and `.cargo/` (where the GitLab check
-keeps the command line). Both are made again when needed.
+keeps the command line). All three are made again when needed.
 
 ## Keep it on GitLab
 
