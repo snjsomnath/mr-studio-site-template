@@ -44,8 +44,15 @@ Check how much LFS space the group has first. GitLab's check fetches LFS files b
 
 ## Share it with the studio computer
 
-Either push here and pull on the studio computer, or use **Share** (top right in the editor) to
-email the table as one `.mrstable` file, which the studio computer opens with **Update it**.
+On the studio computer (MR Studio 0.59 or later), Home's **Get a table from a git repository…** (under Your tables) takes
+this repository's address and keeps the table in its tables folder. When you push a new
+version, the table's card there says **Update from the repository (N new)**. The studio
+computer only follows: a table changed there is not updated over, and nothing updates while it
+is on the screens. Signing in is git's own (Git Credential Manager, an SSH key, or a read-only
+deploy token in the address), and Git LFS must be installed there for LFS files.
+
+Without git, use **Share** (top right in the editor) to email the table as one `.mrstable` file,
+which the studio computer opens with **Update it**.
 
 ## Keys and passwords
 
